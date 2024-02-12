@@ -18,16 +18,15 @@ Let’s write a client-server communication program. There are two files you hav
 `int main(int argc, char *argv[])`
   - main() has largely been implemented, all you have to do is process the command line args and assign them to the given variables, so that the command is accepted in the format `./a.out <ip_address> <port>`.
 
-`int create_connection(char* addr, int port);` **(1 mark)**
+`int create_connection(char* addr, int port);` 
   - This function takes in the IP address and port of the server
-  - It establishes a TCP connection with the server. On successful connection, return the socket descriptor.
-  - If the client has started before the server and the client cannot connect, 
-  - print “Could not find server” and exit.
+  - It establishes a TCP connection with the server. On successful connection, return the socket descriptor. **(1 mark)**
+  - If the client has started before the server and the client cannot connect, print “Could not find server” and exit. **(1 mark)**
 
 `void send_data(int socket_id);` 
   - This function takes in the socket descriptor as a parameter.
-  - It takes user input from stdin, and sends it to the server. **(1 mark)**
-  - If the user types `"EXIT"`. In that case the client should print `"Client exited successfully"` and the client program should terminate. **(1 mark)**
+  - It takes user input from stdin, and sends it to the server. **(0.5 mark)**
+  - If the user types `"EXIT"`. In that case the client should print `"Client exited successfully"` and the client program should terminate. **(0.5 mark)**
 
 
 `void recv_data(int socket_id);`
