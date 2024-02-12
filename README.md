@@ -15,40 +15,46 @@ In this lab, you'll have the opportunity to set up and interact with your own ec
 Let’s write a client-server communication program. There are two files you have been provided with client.c and server.c. These files currently consist of empty functions, it is your job to implement the functions according to the directions provided.
 
 # client.c:
-int create_connection(char* addr, int port); (1 mark)
+`int main(int argc, char *argv[])`
+  - main() has largely been implemented, all you have to do is process the command line args and assign them to the given variables, so that the command is accepted in the format `./a.out <ip_address> <port>`.
+
+`int create_connection(char* addr, int port);` **(1 mark)**
   - This function takes in the IP address and port of the server
   - It establishes a TCP connection with the server. On successful connection, return the socket descriptor.
   - If the client has started before the server and the client cannot connect, 
   - print “Could not find server” and exit.
 
-void send_data(int socket_id); (1 mark)
+`void send_data(int socket_id);` 
   - This function takes in the socket descriptor as a parameter.
-  - It takes user input from stdin, and sends it to the server. 
-  - If the user types "EXIT" (without quotes). In that case the client should print “Client exited successfully” and the client program should terminate. Once a client exits, the server should be ready to handle the next client (only 1 at a time) 
+  - It takes user input from stdin, and sends it to the server. **(1 mark)**
+  - If the user types `"EXIT"`. In that case the client should print `"Client exited successfully"` and the client program should terminate. **(1 mark)**
 
 
-void recv_data(int socket_id); (1 mark)
+`void recv_data(int socket_id);`
   - This function takes in the socket descriptor as a parameter.
   - It receives data from the server.
 
 # server.c:
-int create_connection(char* addr, int port); (1 mark)
+`int main(int argc, char *argv[])`
+  - main() has largely been implemented, all you have to do is process the command line args and assign them to the given variables, so that the command is accepted in the format `./a.out <ip_address> <port>`.
+
+`int create_connection(char* addr, int port);` **(1 mark)**
   - This function takes in the IP address and port on which the server will run.
   - It will bind a socket to the given IP address and port.
   - It will set the socket to listen for new connections. (only one at a time)
 
-int client_connect(int socket_id);
+`int client_connect(int socket_id);`
   - This function takes the socket on which the server is listening on as a parameter.
   - It will accept any incoming client connections and return the socket that the client connection was formed on.
 
-void echo_input(int socket_id);
+`void echo_input(int socket_id);`
   - This function takes the socket which is connected to the client as input.
-  - It will receive data sent from the client and it echoes this same data and sends it back to the client. (1 mark)
-  - If the data sent by the client has a length<5, send back the string: "Error: Message length must be more than 5 characters." (1 mark)
+  - It will receive data sent from the client and it echoes this same data and sends it back to the client. **(1 mark)**
+  - If the data sent by the client has a length<5, send back the string: `"Error: Message length must be more than 5 characters."` **(1 mark)**
   - After echoing back the data, the server can once again receive data from the client, this loop will repeat indefinitely.
 
 
-# NOTE: 
-    - You are provided with scripts in the eval folder.Run those scripts to get your score.You can simply run the command python <script_name>.
-    - Remember this will not be your final score.We will be running your solutions against hidden test cases.
-    - Submit a zip file with the name <id_no>_lab3.zip containing your implementation of client and server. It should only contain two files namely client.c and server.c
+## NOTE:
+  - You are provided with scripts in the eval folder. Run those scripts to get your score. You can simply run the command `python <script_name>`.
+  - Remember this will not be your final score. We will be running your solutions against hidden test cases.
+  - Submit a zip file with the name `<id_no>_lab3.zip` containing your implementation of client and server. It should only contain two files namely client.c and server.c
