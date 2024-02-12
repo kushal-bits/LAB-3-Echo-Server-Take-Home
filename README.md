@@ -1,1 +1,54 @@
-# LAB-3-Echo-Server-Take-Home
+# Important Notes:
+- This lab has automated evaluation.
+- Do not include unnecessary printf statements. Only print the strings mentioned in question. 
+- Any strings which are required to be sent by the client or server must be exactly as specified. (This includes the number of bytes that are being sent)
+- Sending and receiving data requires the connection function to be implemented. If your connection function does not work correctly, the latter parts will not be evaluated.
+- You'll receive a script containing sample test cases, and your submission will be evaluated against hidden test cases to determine the final score. So, please refrain from hard coding solutions.
+- The server_tester.py contains test cases to test the server code and the client_tester.py contains test cases to test the client code.
+
+Welcome to the **Echo Server lab!** Before diving into the practical aspects, let's grasp the concept of an echo server. Imagine an echo server as a digital messenger that patiently waits for incoming messages on a specific TCP port. Once a connection is established between the echo server and a client, it acts like a friendly echo, repeating whatever message it receives.
+
+In simpler terms, the echo server doesn't perform complex operations or alterations to the messages. Its primary job is to mirror back exactly what it hears from the client. So, if the client says "Hello," the echo server cheerfully responds with a "Hello."
+
+In this lab, you'll have the opportunity to set up and interact with your own echo server. Get ready to explore the fascinating world of echo communication!
+
+Let’s write a client-server communication program. There are two files you have been provided with client.c and server.c. These files currently consist of empty functions, it is your job to implement the functions according to the directions provided.
+
+# client.c:
+int create_connection(char* addr, int port); (1 mark)
+  - This function takes in the IP address and port of the server
+  - It establishes a TCP connection with the server. On successful connection, return the socket descriptor.
+  - If the client has started before the server and the client cannot connect, 
+  - print “Could not find server” and exit.
+
+void send_data(int socket_id); (1 mark)
+  - This function takes in the socket descriptor as a parameter.
+  - It takes user input from stdin, and sends it to the server. 
+  - If the user types "EXIT" (without quotes). In that case the client should print “Client exited successfully” and the client program should terminate. Once a client exits, the server should be ready to handle the next client (only 1 at a time) 
+
+
+void recv_data(int socket_id); (1 mark)
+  - This function takes in the socket descriptor as a parameter.
+  - It receives data from the server.
+
+# server.c:
+int create_connection(char* addr, int port); (1 mark)
+  - This function takes in the IP address and port on which the server will run.
+  - It will bind a socket to the given IP address and port.
+  - It will set the socket to listen for new connections. (only one at a time)
+
+int client_connect(int socket_id);
+  - This function takes the socket on which the server is listening on as a parameter.
+  - It will accept any incoming client connections and return the socket that the client connection was formed on.
+
+void echo_input(int socket_id);
+  - This function takes the socket which is connected to the client as input.
+  - It will receive data sent from the client and it echoes this same data and sends it back to the client. (1 mark)
+  - If the data sent by the client has a length<5, send back the string: "Error: Message length must be more than 5 characters." (1 mark)
+  - After echoing back the data, the server can once again receive data from the client, this loop will repeat indefinitely.
+
+
+# NOTE: 
+    - You are provided with scripts in the eval folder.Run those scripts to get your score.You can simply run the command python <script_name>.
+    - Remember this will not be your final score.We will be running your solutions against hidden test cases.
+    - Submit a zip file with the name <id_no>_lab3.zip containing your implementation of client and server. It should only contain two files namely client.c and server.c
