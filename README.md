@@ -2,9 +2,10 @@
 - This lab has automated evaluation.
 - Do not include unnecessary printf statements. Only print the strings mentioned in question. 
 - Any strings which are required to be sent by the client or server must be exactly as specified. (This includes the number of bytes that are being sent)
-- Sending and receiving data requires the connection function to be implemented. If your connection function does not work correctly, the latter parts will not be evaluated.
-- You'll receive a script containing sample test cases, and your submission will be evaluated against hidden test cases to determine the final score. So, please refrain from hard coding solutions.
-- The server_tester.py contains test cases to test the server code and the client_tester.py contains test cases to test the client code.
+- Certain functions such as those for connection are required for other test cases to run, if not implemented, the latter parts will not be evaluated.
+- You'll receive a script containing sample test cases, and your submission will be evaluated against hidden test cases to determine the final score. So refrain from hard coding solutions.
+- server_tester.py contains test cases to test the server code and the client_tester.py for the client code.
+- Submit a zip file with the name `<id_no>_lab3.zip` containing your implementation of client and server. It should be a zip of this repo.
 
 Welcome to the **Echo Server lab!** Before diving into the practical aspects, let's grasp the concept of an echo server. Imagine an echo server as a digital messenger that patiently waits for incoming messages on a specific TCP port. Once a connection is established between the echo server and a client, it acts like a friendly echo, repeating whatever message it receives.
 
@@ -51,9 +52,9 @@ Let’s write a client-server communication program. There are two files you hav
   - It will receive data sent from the client and it echoes this same data and sends it back to the client. **(1 mark)**
   - If the data sent by the client has a length<5, send back the string: `"Error: Message length must be more than 5 characters."` **(0.5 mark)**
   - After echoing back the data, the server can once again receive data from the client, this loop will repeat indefinitely. **(0.5 mark)**
+  - **Note:** if the server cannot take inputs on a loop, all test cases will not be evaluated.
 
 
 ## NOTE:
   - You are provided with scripts in the eval folder. Run those scripts to get your score. You can simply run the command `python <script_name>`.
   - Remember this will not be your final score. We will be running your solutions against hidden test cases.
-  - Submit a zip file with the name `<id_no>_lab3.zip` containing your implementation of client and server. It should only contain two files namely client.c and server.c
