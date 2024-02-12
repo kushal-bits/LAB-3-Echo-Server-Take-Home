@@ -33,7 +33,22 @@ def init_client():
     print_passed("init_client - TEST CASE PASSED")
     return 1
 
-
+def test_server_multiple_echo():
+    check = 0
+    for i in range(2):
+        message = "test234"
+        client_socket.sendall(message.encode())
+        data = client_socket.recv(1024).decode()
+        if data == message:
+            check += 1
+        
+    if check != 2:
+        print_failed("test_server_multiple_echo - TEST CASE FAILED")
+        return 0
+    else:
+        print_passed("test_server_multiple_echo - TEST CASE PASSED")
+        return 0.5
+    
 def test_server_greater_than_or_equal_to_5_characters():
     message = "test123"
     client_socket.sendall(message.encode())
@@ -44,7 +59,8 @@ def test_server_greater_than_or_equal_to_5_characters():
     else:
         print_passed("test_server_greater_than_or_equal_to_5_characters - TEST CASE PASSED")
         return 1
-
+    
+    
 def test_server_less_than_5_characters():
     message = "test"
     client_socket.sendall(message.encode())
@@ -55,11 +71,12 @@ def test_server_less_than_5_characters():
         return 0
     else:
         print_passed("test_server_less_than_5_characters - TEST CASE PASSED")
-        return 1
+        return 0.5
 
 def eval():
-    marks = 0
+    global marks
     marks += init_client()
+    marks += test_server_multiple_echo()
     marks += test_server_greater_than_or_equal_to_5_characters()
     marks += test_server_less_than_5_characters()
 
@@ -74,4 +91,5 @@ if __name__ == "__main__":
         eval()
     except:
         print_failed("Script crashed while Testing, Test Case Failed")
+        print("Marks: ", marks)
 
