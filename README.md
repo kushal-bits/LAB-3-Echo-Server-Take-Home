@@ -1,19 +1,23 @@
 # Important Notes:
-- This lab has automated evaluation.
+- This lab will be evaluated automatically. So, please ensure you follow instructions to the dot.
 - Do not include unnecessary printf statements. Only print the strings mentioned in question. 
-- Any strings which are required to be sent by the client or server must be exactly as specified. (This includes the number of bytes that are being sent)
+- Any strings which are required to be sent by the client or server must be **exactly as specified**. (This includes the number of bytes that are being sent)
 - Certain functions such as those for connection are required for other test cases to run, if not implemented, the latter parts will not be evaluated.
-- You'll receive a script containing sample test cases, and your submission will be evaluated against hidden test cases to determine the final score. So refrain from hard coding solutions.
+- You'll receive a script containing sample test cases, and your submission will be evaluated against hidden test cases (not the ones you will use for testing) to determine the final score. So refrain from hard coding solutions.
 - server_tester.py contains test cases to test the server code and the client_tester.py for the client code.
 - Submit a zip file with the name `<id_no>_lab3.zip` containing your implementation of client and server. It should be a zip of this repo.
 
 Welcome to the **Echo Server lab!** Before diving into the practical aspects, let's grasp the concept of an echo server. Imagine an echo server as a digital messenger that patiently waits for incoming messages on a specific TCP port. Once a connection is established between the echo server and a client, it acts like a friendly echo, repeating whatever message it receives.
 
-In simpler terms, the echo server doesn't perform complex operations or alterations to the messages. Its primary job is to mirror back exactly what it hears from the client. So, if the client says "Hello," the echo server cheerfully responds with a "Hello."
+In simpler terms, the echo server doesn't perform complex operations or alterations to the messages. Its primary job is to mirror back exactly what it hears from the client. So, if the client says "Hello" the echo server cheerfully responds with a "Hello".
 
 In this lab, you'll have the opportunity to set up and interact with your own echo server. Get ready to explore the fascinating world of echo communication!
 
-Let’s write a client-server communication program. There are two files you have been provided with client.c and server.c. These files currently consist of empty functions, it is your job to implement the functions according to the directions provided.
+Let’s write a client-server communication program. There are two files you have been provided with **client.c** and **server.c**. These files currently consist of empty functions, it is your job to implement the functions according to the directions provided.
+
+#Input: 
+Both client.c and server.c file takes two command line arguments as input -- the ip_Address of the server, and the port number where the server is running. Please note that the ip_address and port number provided is that of the server.
+
 
 # client.c:
 `int main(int argc, char *argv[])`
@@ -22,12 +26,12 @@ Let’s write a client-server communication program. There are two files you hav
 `int create_connection(char* addr, int port);` 
   - This function takes in the IP address and port of the server
   - It establishes a TCP connection with the server. On successful connection, return the socket descriptor. **(1 mark)**
-  - If the client has started before the server and the client cannot connect, print “Could not find server” and exit. **(1 mark)**
+  - If the client has started before the server and the client cannot connect, print “Could not find server” and exits. **(1 mark)**
 
 `void send_data(int socket_id);` 
   - This function takes in the socket descriptor as a parameter.
-  - It takes user input from stdin, and sends it to the server. **(0.5 mark)**
-  - If the user types `"EXIT"`. In that case the client should print `"Client exited successfully"` and the client program should terminate. **(0.5 mark)**
+  - It takes user input from stdin, and sends it as-is to the server. **(0.5 mark)**
+  - The only condition where the client does not send the message to the server is when the user types "EXIT". If the user types `"EXIT"`. In that case the client should print `"Client exited successfully"` and the client program should terminate. **(0.5 mark)**
 
 
 `void recv_data(int socket_id);`
