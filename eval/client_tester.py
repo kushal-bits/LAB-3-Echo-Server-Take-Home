@@ -26,7 +26,7 @@ def init_client_before_server():
         stderr=subprocess.PIPE,
         text=True,
     )
-    time.sleep(2)
+    time.sleep(3)
     try:
         output, _ = process.communicate(timeout=2)
         data = output.strip()
@@ -50,7 +50,7 @@ def init_server():
     server_socket.listen(5)
     global process
     process = subprocess.Popen(
-        "gcc ../impl/client.c -o ../impl/client && ../impl/client {} {}".format(host, port),
+        "gcc ../impl/client.c -o ../impl/client && ../impl/client 127.0.0.1 2021",
         shell=True,
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
@@ -122,4 +122,7 @@ if __name__ == "__main__":
     current_script_path = inspect.getfile(inspect.currentframe())
     directory = os.path.dirname(current_script_path)
     os.chdir(directory)
-    eval()
+    try:
+        eval()
+    except:
+        print_failed("Script crashed while Testing, Test Case Failed")

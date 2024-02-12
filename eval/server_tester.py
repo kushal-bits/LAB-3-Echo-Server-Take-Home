@@ -23,8 +23,8 @@ def init_client():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.settimeout(1)
 
-    subprocess.Popen("gcc ../impl/client.c -o ../impl/client && ../impl/client {} {}".format(host, port), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    time.sleep(1)
+    subprocess.Popen("gcc ../impl/server.c -o ../impl/server && ../impl/server {} {}".format(host, port), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    time.sleep(3)
     try:
         client_socket.connect((host, port))
     except:
@@ -70,5 +70,8 @@ if __name__ == "__main__":
     current_script_path = inspect.getfile(inspect.currentframe())
     directory = os.path.dirname(current_script_path)
     os.chdir(directory)
-    eval()
+    try:
+        eval()
+    except:
+        print_failed("Script crashed while Testing, Test Case Failed")
 
