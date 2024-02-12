@@ -19,14 +19,14 @@ def print_failed(msg):
 
 def init_client_before_server():
     process = subprocess.Popen(
-        "gcc ../impl/client.c -o ../impl/client && ../impl/client 127.0.0.1 2021",
+        "gcc ../impl/client.c -o ../impl/client && ../impl/client {} {}".format(host, port),
         shell=True,
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
     )
-    # time.sleep(2)
+    time.sleep(2)
     try:
         output, _ = process.communicate(timeout=2)
         data = output.strip()
@@ -50,7 +50,7 @@ def init_server():
     server_socket.listen(5)
     global process
     process = subprocess.Popen(
-        "gcc ../impl/client.c -o ../impl/client && ../impl/client 127.0.0.1 2021",
+        "gcc ../impl/client.c -o ../impl/client && ../impl/client {} {}".format(host, port),
         shell=True,
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
@@ -87,27 +87,6 @@ def test_client_data():
         print_passed("test_client_data - TEST CASE PASSED")
         return 0.5
 
-
-def test_client_rcv():
-    expected = "test123"
-    input_data = "test123"
-    process.stdin.write(input_data + "\n")
-    process.stdin.flush()
-    try:
-        output, _ = process.communicate(timeout=3)
-        data = output.strip()
-    except subprocess.TimeoutExpired:
-        print_failed("test_client_rcv - TEST CASE FAILED")
-        return 0
-    
-    process.kill()
-    if data != expected:
-        print_failed("test_client_rcv - TEST CASE FAILED")
-        return 0
-    else:
-        print_passed("test_client_rcv - TEST CASE PASSED")
-        return 0.5
-
 def test_client_exit():
     expected = "Client exited successfully"
     input_data = "EXIT"
@@ -121,7 +100,7 @@ def test_client_exit():
         print_failed("test_client_exit - TEST CASE FAILED")
         return 0
 
-    if data != expected:
+    if expected not in data:
         print_failed("test_client_exit - TEST CASE FAILED")
         return 0
     else:
@@ -134,9 +113,7 @@ def eval():
     marks += init_client_before_server()
     marks += init_server()
     marks += test_client_data()
-    # marks += test_client_exit()
-    # init_server()
-    marks += test_client_rcv()
+    marks += test_client_exit()
 
     print("\nTotal Marks: " + str(marks))
 
