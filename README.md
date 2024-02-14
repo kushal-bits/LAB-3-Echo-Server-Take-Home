@@ -54,7 +54,7 @@ Both client.c and server.c file takes two command line arguments as input -- the
 `void echo_input(int socket_id);`
   - This function takes the socket which is connected to the client as input.
   - It will receive data sent from the client and it echoes this same data and sends it back to the client. **(1 mark)**
-  - If the data sent by the client has a length<5, send back the string: `"Error: Message length must be more than 5 characters."` **(0.5 mark)**
+  - If the data sent by the client has a length<5, send back the string: `"Error: Message length must be more than 5 characters"` **(0.5 mark)**
   - After echoing back the data, the server can once again receive data from the client, this loop will repeat indefinitely. **(0.5 mark)**
 
 
